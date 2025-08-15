@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>I'MUSIC • Pesquisa de Artistas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>I'MUSIC 🎤</h1>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/cadastro">Cadastrar Artista</a>
+            <a href="/admin">Administração</a>
+            <a href="/pesquisa">Pesquisar Artistas</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Pesquisar Artistas</h2>
+            <form id="pesquisaForm">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome">
+
+                <label for="estilo">Estilo Musical:</label>
+                <input type="text" id="estilo" name="estilo">
+
+                <button type="submit">Buscar</button>
+            </form>
+
+            <div id="resultado" style="margin-top: 30px;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 I'MUSIC • Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        document.getElementById("pesquisaForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const estilo = document.getElementById("estilo").value;
+
+            const params = new URLSearchParams();
+            if (nome) params.append("nome", nome);
+            if (estilo) params.append("estilo", estilo);
+
+            try {
+                const response = await fetch("/api/artistas/buscar?" + params.toString());
+                const result = await response.json();
+
+                const resultadoDiv = document.getElementById("resultado");
+                resultadoDiv.innerHTML = "";
+
+                if (result.success && result.artistas.length > 0) {
+                    resultadoDiv.innerHTML += `<p><strong>Total encontrados:</strong> ${result.total}</p>`;
+                    result.artistas.forEach(artista => {
+                        resultadoDiv.innerHTML += `
+                            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                                <h3>${artista.nome}</h3>
+                                <p><strong>Estilo:</strong> ${artista.estilo}</p>
+                                <p><strong>Especialidade:</strong> ${artista.especialidade}</p>
+                                ${artista.link ? `<p><a href="${artista.link}" target="_blank">🔗 Ver perfil</a></p>` : ""}
+                                ${artista.fotoUrl ? `<img src="${artista.fotoUrl}" alt="Foto de ${artista.nome}" style="max-width:150px;">` : ""}
+                            </div>
+                        `;
+                    });
+                } else {
+                    resultadoDiv.innerHTML = `<p style="color:red;">Nenhum artista encontrado com os filtros informados.</p>`;
+                }
+
+            } catch (error) {
+                document.getElementById("resultado").innerHTML = `<p style="color:red;">Erro na busca: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>

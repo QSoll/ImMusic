@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>I'MUSIC • Administração</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>I'MUSIC 🎧</h1>
+        <nav>
+            <a href="/">Início</a>
+            <a href="/cadastro">Cadastrar Artista</a>
+            <a href="/pesquisa">Pesquisar Artistas</a>
+            <a href="/admin">Administração</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Painel de Administração</h2>
+            <div id="status"></div>
+            <div id="estatisticas" style="margin-top: 30px;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 I'MUSIC • Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        async function carregarEstatisticas() {
+            try {
+                const response = await fetch("/api/stats");
+                const result = await response.json();
+
+                const statusDiv = document.getElementById("status");
+                const estatisticasDiv = document.getElementById("estatisticas");
+
+                if (result.success) {
+                    statusDiv.innerHTML = `
+                        <p><strong>Status do Serviço:</strong> ${result.serviceStatus}</p>
+                        <p><strongDisponibilidade:</strong> ${result.serviceAvailable ? "✅ Online" : "❌ Offline"}</p>
+                        <p><strongTotal de Artistas:</strong> ${result.totalArtistas}</p>
+                    `;
+
+                    estatisticasDiv.innerHTML = `
+                        <h3>Artistas por Estilo</h3>
+                        <ul>
+                            ${Object.entries(result.artistasPorEstilo).map(([estilo, total]) =>
+                                `<li><strong>${estilo}:</strong> ${total}</li>`).join("")}
+                        </ul>
+
+                        <h3>Artistas por Especialidade</h3>
+                        <ul>
+                            ${Object.entries(result.artistasPorEspecialidade).map(([esp, total]) =>
+                                `<li><strong>${esp}:</strong> ${total}</li>`).join("")}
+                        </ul>
+                    `;
+                } else {
+                    statusDiv.innerHTML = `<p style="color:red;">Erro ao carregar estatísticas: ${result.message}</p>`;
+                }
+
+            } catch (error) {
+                document.getElementById("status").innerHTML = `<p style="color:red;">Erro: ${error.message}</p>`;
+            }
+        }
+
+        carregarEstatisticas();
+    </script>
+</body>
+</html>

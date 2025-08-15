@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>I'MUSIC • Cadastro de Artistas</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">I'MUSIC 🎶</h1>
+        <nav class="nav-buttons">
+            <a href="/" class="nav-btn">Início</a>
+            <a href="/admin" class="nav-btn">Administração</a>
+            <a href="/cadastro" class="nav-btn active">Cadastrar Artista</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="content-section">
+            <h2>Cadastro de Artista</h2>
+            <form id="cadastroForm">
+                <!-- Dados básicos -->
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estilo">Estilo Musical:</label>
+                    <input type="text" id="estilo" name="estilo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="especialidade">Especialidade:</label>
+                    <input type="text" id="especialidade" name="especialidade" required>
+                </div>
+
+                <!-- Redes sociais -->
+                <div class="form-group">
+                    <label for="instagram">Instagram:</label>
+                    <input type="url" id="instagram" name="instagram">
+                </div>
+
+                <div class="form-group">
+                    <label for="youtube">YouTube:</label>
+                    <input type="url" id="youtube" name="youtube">
+                </div>
+
+                <div class="form-group">
+                    <label for="tiktok">TikTok:</label>
+                    <input type="url" id="tiktok" name="tiktok">
+                </div>
+
+                <!-- Plataformas de música -->
+                <div class="form-group">
+                    <label for="spotify">Spotify:</label>
+                    <input type="url" id="spotify" name="spotify">
+                </div>
+
+                <div class="form-group">
+                    <label for="deezer">Deezer:</label>
+                    <input type="url" id="deezer" name="deezer">
+                </div>
+
+                <div class="form-group">
+                    <label for="appleMusic">Apple Music:</label>
+                    <input type="url" id="appleMusic" name="appleMusic">
+                </div>
+
+                <div class="form-group">
+                    <label for="amazonMusic">Amazon Music:</label>
+                    <input type="url" id="amazonMusic" name="amazonMusic">
+                </div>
+
+                <div class="form-group">
+                    <label for="tidal">Tidal:</label>
+                    <input type="url" id="tidal" name="tidal">
+                </div>
+
+                <div class="form-group">
+                    <label for="bandcamp">Bandcamp:</label>
+                    <input type="url" id="bandcamp" name="bandcamp">
+                </div>
+
+                <div class="form-group">
+                    <label for="soundcloud">SoundCloud:</label>
+                    <input type="url" id="soundcloud" name="soundcloud">
+                </div>
+
+                <!-- Outros -->
+                <div class="form-group">
+                    <label for="linksExtras">Links Extras:</label>
+                    <textarea id="linksExtras" name="linksExtras" rows="2" placeholder="Separe os links por vírgula ou quebra de linha"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp:</label>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="(DDD) 99999-9999">
+                </div>
+
+                <div class="form-group">
+                    <label for="cidadeUf">Cidade/UF:</label>
+                    <input type="text" id="cidadeUf" name="cidadeUf" placeholder="Ex: Piúma/ES">
+                </div>
+
+                <div class="form-group">
+                    <label for="biografia">Biografia:</label>
+                    <textarea id="biografia" name="biografia" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="fotoUrl">URL da Foto:</label>
+                    <input type="url" id="fotoUrl" name="fotoUrl">
+                </div>
+
+                <button type="submit" class="btn">Cadastrar</button>
+            </form>
+
+            <div id="mensagem" style="margin-top: 20px;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 I'MUSIC • Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        document.getElementById("cadastroForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const artista = {
+                nome: document.getElementById("nome").value,
+                estilo: document.getElementById("estilo").value,
+                especialidade: document.getElementById("especialidade").value,
+                instagram: document.getElementById("instagram").value,
+                youtube: document.getElementById("youtube").value,
+                tiktok: document.getElementById("tiktok").value,
+                spotify: document.getElementById("spotify").value,
+                deezer: document.getElementById("deezer").value,
+                appleMusic: document.getElementById("appleMusic").value,
+                amazonMusic: document.getElementById("amazonMusic").value,
+                tidal: document.getElementById("tidal").value,
+                bandcamp: document.getElementById("bandcamp").value,
+                soundcloud: document.getElementById("soundcloud").value,
+                linksExtras: document.getElementById("linksExtras").value,
+                email: document.getElementById("email").value,
+                whatsapp: document.getElementById("whatsapp").value,
+                cidadeUf: document.getElementById("cidadeUf").value,
+                biografia: document.getElementById("biografia").value,
+                fotoUrl: document.getElementById("fotoUrl").value
+            };
+
+            try {
+                const response = await fetch("/api/artistas", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(artista)
+                });
+
+                const result = await response.json();
+                const mensagem = document.getElementById("mensagem");
+
+                if (result.success) {
+                    mensagem.innerHTML = `<div class="success-message">✅ ${result.message}</div>`;
+                    document.getElementById("cadastroForm").reset();
+                } else {
+                    mensagem.innerHTML = `<div class="success-message" style="background:#f8d7da; color:#721c24; border-color:#f5c6cb;">❌ ${result.message}</div>`;
+                }
+            } catch (error) {
+                document.getElementById("mensagem").innerHTML = `<div class="success-message" style="background:#f8d7da; color:#721c24; border-color:#f5c6cb;">❌ Erro ao cadastrar: ${error.message}</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
