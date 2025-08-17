@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>I'MUSIC • Administração</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poetsen+One&family=Sen:wght@400..800&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="/src/main/resources/static/css/style.css">
+
+        <title>I'M MUSIC - Conectando Artistas</title>
+
+    </head>
 <body>
+    <div id="shared-header"></div>
+
     <header>
         <h1>I'MUSIC 🎧</h1>
         <nav>
-            <a href="/">Início</a>
-            <a href="/cadastro">Cadastrar Artista</a>
-            <a href="/pesquisa">Pesquisar Artistas</a>
             <a href="/admin">Administração</a>
         </nav>
     </header>
 
-    <main>
+    <main class="topo">
         <section>
             <h2>Painel de Administração</h2>
             <div id="status"></div>
@@ -24,9 +32,7 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 I'MUSIC • Todos os direitos reservados</p>
-    </footer>
+    <div id="shared-footer"></div>
 
     <script>
         async function carregarEstatisticas() {
@@ -68,5 +74,20 @@
 
         carregarEstatisticas();
     </script>
+
+     <script>/*Compartilhar header*/
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-header').innerHTML = data;
+                });
+        </script>
+        <script>/*Compartilhar footer*/
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-footer').innerHTML = data;
+                });
+        </script>
 </body>
 </html>

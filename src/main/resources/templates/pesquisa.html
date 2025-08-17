@@ -1,41 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>I'MUSIC • Pesquisa de Artistas</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat+Alternates:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poetsen+One&family=Sen:wght@400..800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css">
+
+    <title>I'M MUSIC - Conectando Artistas</title>
+
+    <style>
+        .artist-card {
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+        .artist-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 12px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #555;
+        }
+
+        .artist-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .artist-style,
+        .artist-specialty,
+        .artist-bio {
+            font-size: 14px;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .artist-link {
+            margin-top: 8px;
+            display: inline-block;
+            color: #0077cc;
+            text-decoration: none;
+        }
+
+        .artist-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <h1>I'MUSIC 🎤</h1>
-        <nav>
-            <a href="/">Início</a>
-            <a href="/cadastro">Cadastrar Artista</a>
-            <a href="/admin">Administração</a>
-            <a href="/pesquisa">Pesquisar Artistas</a>
-        </nav>
-    </header>
+    <div id="shared-header"></div>
 
     <main>
-        <section>
-            <h2>Pesquisar Artistas</h2>
+        <div class="container">
+            <div class="header">
+                <h1 class="h1-text-color topo">PESQUISAS</h1>
+            </div>
+
             <form id="pesquisaForm">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome">
-
-                <label for="estilo">Estilo Musical:</label>
-                <input type="text" id="estilo" name="estilo">
-
+                <input type="text" id="nome" placeholder="Nome do artista">
+                <input type="text" id="estilo" placeholder="Estilo musical">
                 <button type="submit">Buscar</button>
             </form>
 
-            <div id="resultado" style="margin-top: 30px;"></div>
-        </section>
+            <div id="resultado"></div>
+        </div>
     </main>
 
-    <footer>
-        <p>&copy; 2025 I'MUSIC • Todos os direitos reservados</p>
-    </footer>
+    <div id="shared-footer"></div>
 
     <script>
         document.getElementById("pesquisaForm").addEventListener("submit", async function (e) {
@@ -59,12 +110,16 @@
                     resultadoDiv.innerHTML += `<p><strong>Total encontrados:</strong> ${result.total}</p>`;
                     result.artistas.forEach(artista => {
                         resultadoDiv.innerHTML += `
-                            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
-                                <h3>${artista.nome}</h3>
-                                <p><strong>Estilo:</strong> ${artista.estilo}</p>
-                                <p><strong>Especialidade:</strong> ${artista.especialidade}</p>
-                                ${artista.link ? `<p><a href="${artista.link}" target="_blank">🔗 Ver perfil</a></p>` : ""}
-                                ${artista.fotoUrl ? `<img src="${artista.fotoUrl}" alt="Foto de ${artista.nome}" style="max-width:150px;">` : ""}
+                            <div class="artist-card">
+                                <div class="artist-photo">
+                                    ${artista.fotoUrl ? `<img src="${artista.fotoUrl}" alt="${artista.nome}" style="width:100%; height:100%; object-fit:cover;">` : artista.nome.charAt(0)}
+                                </div>
+                                <div class="artist-name">${artista.nome}</div>
+                                <div class="artist-style"><strong>Estilo:</strong> ${artista.estilo || ""}</div>
+                                <div class="artist-specialty"><strong>Especialidade:</strong> ${artista.especialidade || ""}</div>
+                                <div class="artist-bio">${artista.bio?.substring(0, 120) || ""}${artista.bio?.length > 120 ? "..." : ""}</div>
+                                ${artista.instagram ? `<a href="${artista.instagram}" target="_blank" class="artist-link">Instagram</a>` : ""}
+                                ${artista.spotify ? `<a href="${artista.spotify}" target="_blank" class="artist-link">Spotify</a>` : ""}
                             </div>
                         `;
                     });
@@ -77,5 +132,22 @@
             }
         });
     </script>
+
+    <script>
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('shared-header').innerHTML = data;
+            });
+    </script>
+
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('shared-footer').innerHTML = data;
+            });
+    </script>
 </body>
+
 </html>
