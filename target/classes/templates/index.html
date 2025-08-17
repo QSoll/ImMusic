@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poetsen+One&family=Sen:wght@400..800&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="/src/main/resources/static/css/style.css">
+
+        <title>I'M MUSIC - Conectando Artistas</title>
+
+    </head>
+
+    <body>
+
+      <div id="shared-header"></div>
+    </head>
+
+        <div class="container">
+            <div class="header">
+                <h1 class="h1-text-color topo">I'M MUSIC</h1>
+                
+            </div>
+
+            <!-- Seção Inicial -->
+            <div id="home" class="main-content active">
+                <div class="content-section">
+                    <h3>Conectando músicos, artistas, produtores, apaixonados e curiosos</h3><hr>
+                    <h2  class=""><strong>PARA MÚSICOS</strong> </h2>
+                    <h4  class="">Compartilhe o link das suas músicas (video ou audio) postados nas redes sociais pessoais e musicais e mostre seu talento para o mundo!</h4><hr>
+
+                    <h2 class=""><strong>PARA CONTRATANTES</strong> </h2>
+                     <h4 class="">Encontre o artista perfeito para seu evento ou projeto ! </h4><hr>
+
+                    <h2 class=""><strong>PARA APAIXONADOS POR MÚSICA</strong> </h2>
+                         <h4 class="">Encontre um estilo, um artista ou sua banda
+                        preferida</h4>
+                        <h4>Ouça e explore o universo I'M MUSIC. Curtiu? curta e compartilha !!! </h4><hr>
+
+                    <h2><strong>CURTIU ? Volte sempre !!!</strong></h2>
+                    <h4>Para ouvir seus sons preferidos</h4>
+                    <h4>Para conhecer novos músicos e bandas</h4>
+                    <h4>Para compartilhar o seu som</h4>
+                    <h4>Fique à vontade - Aproveite para curtir e compartilhar !!!
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Cadastro -->
+       
+
+        <!-- Seção de Pesquisa -->
+        <div id="pesquisa" class="main-content">
+            <div class="content-section">
+                <h2 style="margin-bottom: 30px; color: #333;">Buscar Artistas</h2>
+
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Digite o nome do artista...">
+                    <select id="styleFilter">
+                        <option value="">Todos os estilos</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Pop">Pop</option>
+                        <option value="MPB">MPB</option>
+                        <option value="Sertanejo">Sertanejo</option>
+                        <option value="Funk">Funk</option>
+                        <option value="Hip Hop">Hip Hop</option>
+                        <option value="Eletrônica">Eletrônica</option>
+                        <option value="Reggae">Reggae</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Blues">Blues</option>
+                        <option value="Folk">Folk</option>
+                        <option value="Clássica">Clássica</option>
+                    </select>
+                    <button onclick="searchArtists()" class="btn">Buscar</button>
+                </div>
+
+                <div id="artistsResults" class="artists-grid"></div>
+            </div>
+        </div>
+        </div>
+
+        <div id="shared-footer"></div>
+
+        <script>
+            // Dados simulados dos artistas (em produção, viriam do backend/Google Sheets)
+            let artists = [
+                {
+                    nome: "João Silva",
+                    estilo: "Rock",
+                    especialidade: "Guitarra",
+                    link: "https://instagram.com/joaorock",
+                    bio: "Guitarrista com 10 anos de experiência em bandas de rock alternativo. Já se apresentou em diversos festivais e possui um estilo único que mescla rock clássico com elementos modernos.",
+                    foto: ""
+                },
+                {
+                    nome: "Maria Santos",
+                    estilo: "MPB",
+                    especialidade: "Vocal",
+                    link: "https://instagram.com/mariampb",
+                    bio: "Cantora e compositora de MPB, com influências de Elis Regina e Gal Costa. Possui dois álbuns autorais e se apresenta regularmente em casas de show de São Paulo.",
+                    foto: ""
+                },
+                {
+                    nome: "DJ Beats",
+                    estilo: "Eletrônica",
+                    especialidade: "DJ",
+                    link: "https://soundcloud.com/djbeats",
+                    bio: "DJ e produtor especializado em música eletrônica e house music. Já tocou em principais casas noturnas do país e produz tracks para outros artistas.",
+                    foto: ""
+                },
+                {
+                    nome: "Carlos Acoustic",
+                    estilo: "Folk",
+                    especialidade: "Violão",
+                    link: "https://youtube.com/carlosacoustic",
+                    bio: "Violonista fingerstyle com repertório diverso, desde música brasileira até covers internacionais. Especialista em performances acústicas intimistas.",
+                    foto: ""
+                }
+            ];
+
+            function showSection(sectionId) {
+                // Esconder todas as seções
+                document.querySelectorAll('.main-content').forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Remover classe active de todos os botões
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Mostrar seção selecionada
+                document.getElementById(sectionId).classList.add('active');
+
+                // Adicionar classe active ao botão clicado
+                event.target.classList.add('active');
+
+                // Se for a seção de pesquisa, carregar artistas
+                if (sectionId === 'pesquisa') {
+                    displayArtists(artists);
+                }
+            }
+
+            function displayArtists(artistsList) {
+                const resultsContainer = document.getElementById('artistsResults');
+
+                if (artistsList.length === 0) {
+                    resultsContainer.innerHTML = '<p style="text-align: center; color: #666; font-size: 1.2rem; padding: 40px;">Nenhum artista encontrado.</p>';
+                    return;
+                }
+
+                resultsContainer.innerHTML = artistsList.map(artist => `
+                <div class="artist-card">
+                    <div class="artist-photo">
+                        ${artist.foto ? `<img src="${artist.foto}" alt="${artist.nome}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">` : artist.nome.charAt(0).toUpperCase()}
+                    </div>
+                    <div class="artist-name">${artist.nome}</div>
+                    <div class="artist-style">${artist.estilo}</div>
+                    <div class="artist-specialty">${artist.especialidade}</div>
+                    ${artist.bio ? `<div class="artist-bio">${artist.bio.substring(0, 120)}${artist.bio.length > 120 ? '...' : ''}</div>` : ''}
+                    ${artist.link ? `<a href="${artist.link}" target="_blank" class="artist-link">Ver Perfil</a>` : ''}
+                </div>
+            `).join('');
+            }
+
+            function searchArtists() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const styleFilter = document.getElementById('styleFilter').value;
+
+                let filteredArtists = artists.filter(artist => {
+                    const matchesName = artist.nome.toLowerCase().includes(searchTerm);
+                    const matchesStyle = !styleFilter || artist.estilo === styleFilter;
+                    return matchesName && matchesStyle;
+                });
+
+                displayArtists(filteredArtists);
+            }
+
+            // Event listeners para busca em tempo real
+            document.getElementById('searchInput').addEventListener('input', searchArtists);
+            document.getElementById('styleFilter').addEventListener('change', searchArtists);
+
+            // Manipulação do formulário de cadastro
+            document.getElementById('artistForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(e.target);
+                const newArtist = {
+                    nome: formData.get('nome'),
+                    estilo: formData.get('estilo'),
+                    especialidade: formData.get('especialidade'),
+                    link: formData.get('link'),
+                    bio: formData.get('bio'),
+                    foto: formData.get('foto')
+                };
+
+                // Adicionar novo artista à lista (em produção, enviaria para o backend)
+                artists.push(newArtist);
+
+                // Mostrar mensagem de sucesso
+                const form = document.getElementById('artistForm');
+                form.insertAdjacentHTML('afterbegin',
+                    '<div class="success-message">✅ Artista cadastrado com sucesso! Agora você pode ser encontrado na busca.</div>'
+                );
+
+                // Limpar formulário
+                form.reset();
+
+                // Remover mensagem após 5 segundos
+                setTimeout(() => {
+                    const successMsg = document.querySelector('.success-message');
+                    if (successMsg) successMsg.remove();
+                }, 5000);
+            });
+
+            // Carregar artistas iniciais na pesquisa se já estiver na aba
+            if (document.getElementById('pesquisa').classList.contains('active')) {
+                displayArtists(artists);
+            }
+        </script>
+        <script>/*Compartilhar header*/
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-header').innerHTML = data;
+                });
+        </script>
+        <script>/*Compartilhar footer*/
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-footer').innerHTML = data;
+                });
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>-->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poetsen+One&family=Sen:wght@400..800&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="/src/main/resources/static/css/style.css">
+
+        <title>I'M MUSIC - Conectando Artistas</title>
+
+    </head>
+
+    <body>
+        <div id="shared-header"></div>
+
+        <div class="container">
+            <div class="header">
+                <h1 class="h1-text-color topo">Insira seus dados</h1>
+                <h1 class="h1-text-color">Salve para compartilhar</h1>
+
+            </div>
+
+
+            <main class="container">
+                <section class="content-section">
+                    <form id="cadastroForm">
+                        <!-- Dados básicos -->
+
+                        <!-- Seção de Cadastro -->
+                        <div id="cadastro" class="main-content">
+                            <div class="content-section">
+                                <h2 style="margin-bottom: 30px; color: #333;">Formulário</h2>
+
+                                <form id="artistForm">
+                                    <div class="form-group">
+                                        <label for="nome">Nome Artístico *</label>
+                                        <input type="text" id="nome" name="nome" required>
+
+                                        <label for="email">E-mail *</label>
+                                        <input type="text" id="email" name="email" required>
+
+                                        <label for="whatsapp">Whatsapp</label>
+                                        <input type="text" id="whatsapp" name="whatsapp">
+
+                                        <label for="cidade-uf">Cidade / UF</label>
+                                        <input type="text" id="cidade-uf" name="cidade-uf">
+
+                                        <label for="Banda">Banda</label>
+                                        <input type="text" id="Banda" name="Banda">
+                                    </div>
+
+                                    <div class="form-group"><!--Especialidade-->
+                                        <label for="especialidade">Especialidade *</label>
+                                        <select id="especialidade" name="especialidade" required>
+                                            <option value="">Selecione a especialidade</option>
+                                            <option value="Arranjador">Arranjador</option>
+                                            <option value="Backing vocal">Backing vocal</option>
+                                            <option value="Cantor">Cantor</option>
+                                            <option value="Compositor">Compositor</option>
+                                            <option value="Letrista">Letrista</option>
+                                            <option value="DJ">DJ</option>
+                                            <option value="Engenheiro de som">Engenheiro de som</option>
+                                            <option value="Técnico de som">Técnico de som</option>
+                                            <option value="Produtor">Produtor</option>
+                                            <option value="Instrumentista">Instrumentista</option>
+                                            <option value="Multi instrumentista">Multi-instrumentista</option>
+                                            <option value="Luthier">Luthier</option>
+                                            <option value="Professor">Professor</option>
+                                            <option value="Regente / Maestro">Regente / Maestro</option>
+                                            <option value="Roadies">Roadies</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group"><!--Estilo musical-->
+                                        <label for="estilo">Estilo Musical *</label>
+                                        <small class="form-hint">Segure Ctrl (Windows) ou Command (Mac) para selecionar
+                                            vários estilos</small>
+                                        <select id="estilo" name="estilo[]" multiple required>
+                                            <option value="Axé">Axé</option>
+                                            <option value="Baião">Baião</option>
+                                            <option value="Bolero">Bolero</option>
+                                            <option value="Bossa nova">Bossa nova</option>
+                                            <option value="Blues">Blues</option>
+                                            <option value="Carimbó">Carimbó</option>
+                                            <option value="Clássica">Clássica</option>
+                                            <option value="Country">Country</option>
+                                            <option value="Eletrônica">Eletrônica</option>
+                                            <option value="Folk">Folk</option>
+                                            <option value="Forró">Forró</option>
+                                            <option value="Funk">Funk</option>
+                                            <option value="Gospel">Gospel</option>
+                                            <option value="Hip hop">Hip hop</option>
+                                            <option value="Jazz">Jazz</option>
+                                            <option value="Maracatu">Maracatu</option>
+                                            <option value="MPB">MPB</option>
+                                            <option value="New MPB">New MPB</option>
+                                            <option value="Pagode">Pagode</option>
+                                            <option value="Piseiro">Piseiro</option>
+                                            <option value="Pop">Pop</option>
+                                            <option value="R&B">R&B</option>
+                                            <option value="Reggae">Reggae</option>
+                                            <option value="Rock">Rock</option>
+                                            <option value="Samba">Samba</option>
+                                            <option value="Sertanejo">Sertanejo</option>
+                                            <option value="Sertanejo">Soul</option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group"><!--Estilo musical-->
+                                        <label for="estilo">Instrumentos *</label>
+                                        <small class="form-hint">Segure Ctrl (Windows) ou Command (Mac) para selecionar
+                                            vários instrumentos</small>
+                                        <select id="estilo" name="estilo[]" multiple required>
+                                            <option value="Baixo">Baixo</option>
+                                            <option value="Banjo">Banjo</option>
+                                            <option value="Bandolim">Bandolim</option>
+                                            <option value="Bateria">Bateria</option>
+                                            <option value="Cavaquinho">Cavaquinho</option>
+                                            <option value="Chocalho">Chocalho</option>
+                                            <option value="Citara">Citara</option>
+                                            <option value="Cuíca">Cuíca</option>
+                                            <option value="Gaita">Gaita</option>
+                                            <option value="Ganzá">Ganzá</option>
+                                            <option value="Guitarra">Guitarra</option>
+                                            <option value="Harpa">Harpa</option>
+                                            <option value="Pandeiro">Pandeiro</option>
+                                            <option value="Piano">Piano</option>
+                                            <option value="Saxofone">Saxofone</option>
+                                            <option value="Teclado">Teclado</option>
+                                            <option value="Ukulele">Ukulele</option>
+                                            <option value="Violão">Violão</option>
+                                            <option value="Violino">Violino</option>
+                                            <option value="Violoncelo">Violoncelo</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="facebook">Link Facebook</label>
+                                        <input type="url" id="facebook" name="facebook">
+
+                                        <label for="github">Link GitHub</label>
+                                        <input type="url" id="github" name="github">
+
+                                        <label for="instagram">Link Instagram</label>
+                                        <input type="url" id="instagram" name="instagram">
+
+                                        <label for="kwai">Link Kwai</label>
+                                        <input type="url" id="kwai" name="kwai">
+
+                                        <label for="linkedin">Link LinkedIn</label>
+                                        <input type="url" id="linkedin" name="linkedin">
+
+                                        <label for="threads">Link Threads</label>
+                                        <input type="url" id="threads" name="threads">
+
+                                        <label for="tiktok">Link TikTok</label>
+                                        <input type="url" id="tiktok" name="tiktok">
+
+                                        <label for="twitter">Link Twitter</label>
+                                        <input type="url" id="twitter" name="twitter">
+
+                                        <label for="youtube">Link YouTube Music</label>
+                                        <input type="url" id="youtube" name="youtube">
+
+                                        <label for="amazonmusic">Link Amazon Music</label>
+                                        <input type="url" id="amazonmusic" name="amazonmusic">
+
+                                        <label for="applemusic">Link Apple Music</label>
+                                        <input type="url" id="applemusic" name="applemusic">
+
+                                        <label for="bandcamp">Link BandCamp</label>
+                                        <input type="url" id="bandcamp" name="bandcamp">
+
+                                        <label for="deezer">Link Deezer</label>
+                                        <input type="url" id="deezer" name="deezer">
+
+                                        <label for="palcom3">Link Palco MP3</label>
+                                        <input type="url" id="palcom3" name="palcom3">
+
+                                        <label for="resso">Link Resso</label>
+                                        <input type="url" id="resso" name="resso">
+
+                                        <label for="soundcloud">Link SoundCloud</label>
+                                        <input type="url" id="soundcloud" name="soundcloud">
+
+                                        <label for="spotify">Link Spotify</label>
+                                        <input type="url" id="spotify" name="spotify">
+
+                                        <label for="suamusica">Link Sua Música</label>
+                                        <input type="url" id="suamusica" name="suamusica">
+
+                                        <label for="tidal">Link Tidal</label>
+                                        <input type="url" id="tidal" name="tidal">
+
+                                        <label for="youtubemusic">Link YouTube Music</label>
+                                        <input type="url" id="youtubemusic" name="youtubemusic">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="bio">Biografia</label>
+                                        <textarea id="bio" name="bio"
+                                            placeholder="Conte um pouco sobre você, sua trajetória musical e experiências..."></textarea>
+                                    </div>
+
+                                    <!--<div class="form-group">
+                                        <label for="foto">Link da Foto de Perfil</label>
+                                        <input type="url" id="foto" name="foto"
+                                            placeholder="https://exemplo.com/sua-foto.jpg">
+                                    </div>-->
+                                    <div class="form-group">
+                                        <label>Músicas Individuais</label>
+                                        <div id="musicas-container">
+                                            <div class="musica-item">
+                                                <input type="text" name="musicasIndividuais[0].nome"
+                                                    placeholder="Nome da música">
+                                                <input type="url" name="musicasIndividuais[0].url"
+                                                    placeholder="URL da música">
+                                            </div>
+                                        </div>
+                                        <button type="button" onclick="adicionarMusica()">Adicionar outra
+                                            música</button>
+                                    </div>
+
+
+                                    <button type="submit" class="btn-roxo">Salvar</button>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                    <div id="mensagem" style="margin-top: 20px;"></div>
+                </section>
+            </main>
+        </div>
+
+        <div id="shared-footer"></div>
+
+        <script>
+            document.getElementById("cadastroForm").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                const artista = {
+                    nome: document.getElementById("nome").value,
+                    estilo: document.getElementById("estilo").value,
+                    especialidade: document.getElementById("especialidade").value,
+                    instagram: document.getElementById("instagram").value,
+                    youtube: document.getElementById("youtube").value,
+                    tiktok: document.getElementById("tiktok").value,
+                    spotify: document.getElementById("spotify").value,
+                    deezer: document.getElementById("deezer").value,
+                    appleMusic: document.getElementById("appleMusic").value,
+                    amazonMusic: document.getElementById("amazonMusic").value,
+                    tidal: document.getElementById("tidal").value,
+                    bandcamp: document.getElementById("bandcamp").value,
+                    soundcloud: document.getElementById("soundcloud").value,
+                    linksExtras: document.getElementById("linksExtras").value,
+                    email: document.getElementById("email").value,
+                    whatsapp: document.getElementById("whatsapp").value,
+                    cidadeUf: document.getElementById("cidadeUf").value,
+                    biografia: document.getElementById("biografia").value,
+                    fotoUrl: document.getElementById("fotoUrl").value
+                };
+
+                try {
+                    const response = await fetch("/api/artistas", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(artista)
+                    });
+
+                    const result = await response.json();
+                    const mensagem = document.getElementById("mensagem");
+
+                    if (result.success) {
+                        mensagem.innerHTML = `<div class="success-message">✅ ${result.message}</div>`;
+                        document.getElementById("cadastroForm").reset();
+                    } else {
+                        mensagem.innerHTML = `<div class="success-message" style="background:#f8d7da; color:#721c24; border-color:#f5c6cb;">❌ ${result.message}</div>`;
+                    }
+                } catch (error) {
+                    document.getElementById("mensagem").innerHTML = `<div class="success-message" style="background:#f8d7da; color:#721c24; border-color:#f5c6cb;">❌ Erro ao cadastrar: ${error.message}</div>`;
+                }
+            });
+        </script>
+        <script>
+            let musicaIndex = 1;
+
+            function adicionarMusica() {
+                const container = document.getElementById("musicas-container");
+
+                const novaMusica = document.createElement("div");
+                novaMusica.className = "musica-item";
+                novaMusica.innerHTML = `
+      <input type="text" name="musicasIndividuais[${musicaIndex}].nome" placeholder="Nome da música">
+      <input type="url" name="musicasIndividuais[${musicaIndex}].url" placeholder="URL da música">
+    `;
+                container.appendChild(novaMusica);
+                musicaIndex++;
+            }
+        </script>
+
+
+        <script>/*Compartilhar header*/
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-header').innerHTML = data;
+                });
+        </script>
+        <script>/*Compartilhar footer*/
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-footer').innerHTML = data;
+                });
+        </script>
+
+    </body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poetsen+One&family=Sen:wght@400..800&display=swap"
+            rel="stylesheet">
+
+        <link rel="stylesheet" href="/src/main/resources/static/css/style.css">
+
+        <title>I'M MUSIC - Conectando Artistas</title>
+
+    </head>
+<body>
+    <div id="shared-header"></div>
+
+    <header>
+        <h1>I'MUSIC 🎧</h1>
+        <nav>
+            <a href="/admin">Administração</a>
+        </nav>
+    </header>
+
+    <main class="topo">
+        <section>
+            <h2>Painel de Administração</h2>
+            <div id="status"></div>
+            <div id="estatisticas" style="margin-top: 30px;"></div>
+        </section>
+    </main>
+
+    <div id="shared-footer"></div>
+
+    <script>
+        async function carregarEstatisticas() {
+            try {
+                const response = await fetch("/api/stats");
+                const result = await response.json();
+
+                const statusDiv = document.getElementById("status");
+                const estatisticasDiv = document.getElementById("estatisticas");
+
+                if (result.success) {
+                    statusDiv.innerHTML = `
+                        <p><strong>Status do Serviço:</strong> ${result.serviceStatus}</p>
+                        <p><strongDisponibilidade:</strong> ${result.serviceAvailable ? "✅ Online" : "❌ Offline"}</p>
+                        <p><strongTotal de Artistas:</strong> ${result.totalArtistas}</p>
+                    `;
+
+                    estatisticasDiv.innerHTML = `
+                        <h3>Artistas por Estilo</h3>
+                        <ul>
+                            ${Object.entries(result.artistasPorEstilo).map(([estilo, total]) =>
+                                `<li><strong>${estilo}:</strong> ${total}</li>`).join("")}
+                        </ul>
+
+                        <h3>Artistas por Especialidade</h3>
+                        <ul>
+                            ${Object.entries(result.artistasPorEspecialidade).map(([esp, total]) =>
+                                `<li><strong>${esp}:</strong> ${total}</li>`).join("")}
+                        </ul>
+                    `;
+                } else {
+                    statusDiv.innerHTML = `<p style="color:red;">Erro ao carregar estatísticas: ${result.message}</p>`;
+                }
+
+            } catch (error) {
+                document.getElementById("status").innerHTML = `<p style="color:red;">Erro: ${error.message}</p>`;
+            }
+        }
+
+        carregarEstatisticas();
+    </script>
+
+     <script>/*Compartilhar header*/
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-header').innerHTML = data;
+                });
+        </script>
+        <script>/*Compartilhar footer*/
+            fetch('footer.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('shared-footer').innerHTML = data;
+                });
+        </script>
+</body>
+</html>
