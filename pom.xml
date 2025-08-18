@@ -69,8 +69,16 @@
         <plugins>
             <!-- Plugin do Spring Boot -->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+               <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-maven-plugin</artifactId>
+  <version>3.1.2</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>repackage</goal>
+      </goals>
+    </execution>
+  </executions>
             </plugin>
 
             <!-- Plugin de compilação Java -->
