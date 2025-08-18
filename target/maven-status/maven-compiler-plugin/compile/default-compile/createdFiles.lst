@@ -1,5 +1,0 @@
-com\immusic\ImmusicApplication.class
-com\immusic\repository\ArtistaRepository.class
-com\immusic\model\Album.class
-com\immusic\model\Artista.class
-com\immusic\model\MusicaLink.class

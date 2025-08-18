@@ -62,34 +62,40 @@
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
             <scope>compile</scope>
-            </dependency>
-            
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <!-- Plugin do Spring Boot -->
             <plugin>
-               <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-maven-plugin</artifactId>
-  <version>3.1.2</version>
-  <executions>
-    <execution>
-      <goals>
-        <goal>repackage</goal>
-      </goals>
-    </execution>
-  </executions>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
-            <!-- Plugin de compilação Java -->
+            <!-- Plugin de compilação Java com suporte ao Lombok -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <source>21</source>
-                    <target>21</target>
+                   <release>21</release>
+
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.30</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
