@@ -17,7 +17,6 @@
         <spring.boot.version>3.1.2</spring.boot.version>
     </properties>
 
-    <!-- Gerenciamento de dependências do Spring Boot -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -71,7 +70,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${spring.boot.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -79,6 +78,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <mainClass>br.com.immusic.ImmusicApplication</mainClass>
+                </configuration>
             </plugin>
 
             <!-- Plugin de compilação Java com suporte ao Lombok -->
@@ -87,8 +89,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                   <release>21</release>
-
+                    <release>${java.version}</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
