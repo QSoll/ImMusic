@@ -4,7 +4,7 @@
                              http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>br.com.immusic</groupId>
+    <groupId>com.immusic</groupId>
     <artifactId>immusic</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -77,7 +77,7 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>br.com.immusic.ImmusicApplication</mainClass>
+                            <mainClass>com.immusic.ImmusicApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>
