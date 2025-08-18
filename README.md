@@ -36,7 +36,7 @@ Plataforma colaborativa para cadastro e pesquisa de artistas musicais, desenvolv
 
 ## Tecnologias Utilizadas
 
-- Java 17
+- Java 21
 - Spring Boot 3.1.2
 - Maven
 - HTML, CSS, JavaScript (interface)
