@@ -1,0 +1,6 @@
+com\immusic\ImmusicApplication.class
+com\immusic\repository\ArtistaRepository.class
+com\immusic\model\Album.class
+com\immusic\model\Artista.class
+com\immusic\controller\ArtistaController.class
+com\immusic\model\MusicaLink.class
