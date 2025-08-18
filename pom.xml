@@ -76,11 +76,11 @@
                         <goals>
                             <goal>repackage</goal>
                         </goals>
+                        <configuration>
+                            <mainClass>br.com.immusic.ImmusicApplication</mainClass>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <mainClass>br.com.immusic.ImmusicApplication</mainClass>
-                </configuration>
             </plugin>
 
             <!-- Plugin de compilação Java com suporte ao Lombok -->
