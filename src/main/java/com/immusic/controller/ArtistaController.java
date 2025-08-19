@@ -42,9 +42,12 @@ public class ArtistaController {
         List<Artista> todos = repo.findAll();
 
         List<Artista> filtrados = todos.stream()
-                .filter(a -> (nome == null || a.getNome().toLowerCase().contains(nome.toLowerCase())) &&
-                        (estilo == null || a.getEstilosMusicais().stream()
-                                .anyMatch(e -> e.toLowerCase().contains(estilo.toLowerCase()))))
+                .filter(a -> (nome == null ||
+                        a.getNome() != null && a.getNome().toLowerCase().contains(nome.toLowerCase())) &&
+                        (estilo == null ||
+                                a.getEstilosMusicais() != null && a.getEstilosMusicais().stream()
+                                        .anyMatch(e -> e.toLowerCase().contains(estilo.toLowerCase()))))
+
                 .toList();
 
         Map<String, Object> resposta = new HashMap<>();
